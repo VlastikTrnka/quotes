@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { QuoteList } from './QuoteList';
-import { AddQuoteWithTagsForm } from './AddQuoteWithTagsForm'; // Nová komponenta
+import { AddQuoteWithTagsForm } from './AddQuoteWithTagsForm';
 import { SearchQuotes } from './SearchQuotes';
 import { RandomQuote } from './RandomQuote';
-import { AddTagForm } from './AddTagForm'; // Komponenta pro přidávání tagů
+import { AddTagForm } from './AddTagForm';
 import { Quote, Tag } from './Type';
 
 export function UserProfile() {
@@ -18,6 +18,7 @@ export function UserProfile() {
   const [tags, setTags] = useState<Tag[]>([]);
 
   const token = localStorage.getItem('token');
+  const userId = localStorage.getItem('userId'); // Získej userId z localStorage nebo odkudkoli je uloženo
 
   useEffect(() => {
     const fetchQuotes = async () => {
@@ -63,7 +64,7 @@ export function UserProfile() {
         tags={tags}
         token={token}
       />
-      <AddTagForm setTags={setTags} token={token} /> {/* Nová komponenta pro přidávání tagů */}
+      <AddTagForm setTags={setTags} token={token} />
       <SearchQuotes
         searchText={searchText}
         setSearchText={setSearchText}

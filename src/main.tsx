@@ -42,8 +42,7 @@ function App() {
             </>
           ) : (
             <>
-              <li><Link to={"/userprofile"}>User Profile</Link></li>
-              <li><button onClick={handleLogout}>Logout</button></li>
+              <button onClick={handleLogout}>Logout</button>
             </>
           )}
         </ul>

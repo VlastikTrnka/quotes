@@ -13,6 +13,9 @@ interface SearchQuotesProps {
 
 export function SearchQuotes({ searchText, setSearchText, searchTag, setSearchTag, searchResults, setSearchResults, tags }: SearchQuotesProps) {
   const handleSearchQuotes = async () => {
+    if (!searchText && !searchTag) {
+      return;
+    }
     const url = `http://localhost:5136/api/quotes/by-text-or-tag?text=${searchText}&tag=${searchTag}`;
     const response = await fetch(url);
     if (response.ok) {

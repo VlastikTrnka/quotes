@@ -25,6 +25,16 @@ export function QuoteList({ quotes, editQuoteId, editQuoteText, setEditQuoteId, 
     }
   };
 
+  const handleDeleteQuote = async (quoteId: number) => {
+    const response = await fetch(`http://localhost:5136/api/quotes/${quoteId}`, {
+      method: 'DELETE',
+      headers: { 'Authorization': `Bearer ${token}` },
+    });
+    if (response.ok) {
+      setQuotes(quotes.filter(q => q.quoteId !== quoteId));
+    }
+  };
+
   return (
     <ul>
       {quotes.length > 0 ? (
@@ -43,6 +53,7 @@ export function QuoteList({ quotes, editQuoteId, editQuoteText, setEditQuoteId, 
                   setEditQuoteId(quote.quoteId);
                   setEditQuoteText(quote.text);
                 }}>Edit</button>
+                <button onClick={() => handleDeleteQuote(quote.quoteId)}>Delete</button>
               </>
             )}
           </li>

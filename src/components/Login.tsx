@@ -7,7 +7,7 @@ function Login( {onLogin} : {onLogin: () => void} ) {
   const [password, setPassword] = useState('');
   const twoFactorCode = '';
   const twoFactorRecoveryCode = '';
-  const navigate = useNavigate();  // Hook for navigation
+  const navigate = useNavigate();
 
   const handleSubmit = async (e : any) => {
     e.preventDefault();
@@ -34,7 +34,6 @@ function Login( {onLogin} : {onLogin: () => void} ) {
 
     onLogin();
 
-    // Přesměrování na stránku pro správu citátů po úspěšném přihlášení
     navigate('/userprofile');
   };
 
@@ -44,20 +43,20 @@ function Login( {onLogin} : {onLogin: () => void} ) {
         <h2>Login</h2>
         <form onSubmit={handleSubmit}>
           <div>
-            <label htmlFor="email">Email:</label>
             <input 
               type="email" 
               id="email" 
-              value={email} 
+              value={email}
+              placeholder="example@gmail.com"
               onChange={(e) => setEmail(e.target.value)} 
               required 
             />
           </div>
           <div>
-            <label htmlFor="password">Password:</label>
             <input 
               type="password" 
               id="password" 
+              placeholder="password"
               value={password} 
               onChange={(e) => setPassword(e.target.value)} 
               required 

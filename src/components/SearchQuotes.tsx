@@ -12,6 +12,7 @@ interface SearchQuotesProps {
 }
 
 export function SearchQuotes({ searchText, setSearchText, searchTag, setSearchTag, searchResults, setSearchResults, tags }: SearchQuotesProps) {
+  
   const handleSearchQuotes = async () => {
     if (!searchText && !searchTag) {
       return;
@@ -27,8 +28,8 @@ export function SearchQuotes({ searchText, setSearchText, searchTag, setSearchTa
   return (
     <div>
       <h3>Search Quotes</h3>
-      <input type="text" value={searchText} onChange={e => setSearchText(e.target.value)} placeholder="Search text" />
-      <select value={searchTag} onChange={e => setSearchTag(e.target.value)}>
+      <input className='inputAdd' type="text" value={searchText} onChange={e => setSearchText(e.target.value)} placeholder="Search text" />
+      <select className='inputAdd' value={searchTag} onChange={e => setSearchTag(e.target.value)}>
         <option value="">-- Select a tag --</option>
         {tags.map(tag => (
           <option key={tag.tagId} value={tag.text}>{tag.text}</option>
@@ -45,3 +46,5 @@ export function SearchQuotes({ searchText, setSearchText, searchTag, setSearchTa
     </div>
   );
 }
+
+export default SearchQuotes;

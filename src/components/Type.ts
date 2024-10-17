@@ -1,6 +1,8 @@
 export interface Quote {
   quoteId: number;
   text: string;
+  userId: string;
+  tags: Tag[];
 }
   
 export interface Tag {

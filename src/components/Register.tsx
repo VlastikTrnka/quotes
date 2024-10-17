@@ -6,7 +6,6 @@ function Register() {
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
-    // Handle form submission, e.g., send data to the server
 
     const response = await fetch("http://localhost:5136/register", {
         method: 'POST',
@@ -25,7 +24,6 @@ function Register() {
         <h2>Register</h2>
         <form onSubmit={handleSubmit}>
           <div>
-            <label>Email:</label>
             <input 
               type="email" 
               value={email} 
@@ -34,7 +32,6 @@ function Register() {
             />
           </div>
           <div>
-            <label>Password:</label>
             <input 
               type="password" 
               value={password} 

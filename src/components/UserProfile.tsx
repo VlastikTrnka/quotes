@@ -18,7 +18,7 @@ export function UserProfile() {
   const [tags, setTags] = useState<Tag[]>([]);
 
   const token = localStorage.getItem('token');
-  const userId = localStorage.getItem('userId'); // Získej userId z localStorage nebo odkudkoli je uloženo
+  const userId = localStorage.getItem('userId');
 
   useEffect(() => {
     const fetchQuotes = async () => {
@@ -46,7 +46,7 @@ export function UserProfile() {
   }, []);
 
   return (
-    <div className="quotes-container">
+    <div className="container">
       <h2>Your Quotes</h2>
       <QuoteList
         quotes={quotes}

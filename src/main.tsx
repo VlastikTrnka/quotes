@@ -11,10 +11,9 @@ function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const navigate = useNavigate();
 
-  // Při načtení aplikace vždy smaže token z localStorage
   useEffect(() => {
-    localStorage.removeItem('token'); // Uživatel je vždy odhlášen při spuštění aplikace
-    setIsLoggedIn(false); // Nastaví stav na odhlášený
+    localStorage.removeItem('token');
+    setIsLoggedIn(false);
   }, []);
 
   const handleLogin = () => {
@@ -25,14 +24,14 @@ function App() {
   };
 
   const handleLogout = () => {
-    localStorage.removeItem('token'); // Odstranění tokenu při logoutu
-    setIsLoggedIn(false); // Aktualizace stavu na odhlášený
-    navigate('/login'); // Přesměrování na login stránku
+    localStorage.removeItem('token');
+    setIsLoggedIn(false);
+    navigate('/login'); 
   };
 
   return (
     <>
-      <nav>
+      <nav className='navbar'>
         <ul>
           {!isLoggedIn ? (
             <>

@@ -48,12 +48,13 @@ export function QuoteList({ quotes, editQuoteId, editQuoteText, setEditQuoteId, 
               </>
             ) : (
               <>
-                {quote.text}
-                <button onClick={() => {
-                  setEditQuoteId(quote.quoteId);
-                  setEditQuoteText(quote.text);
-                }}>Edit</button>
-                <button onClick={() => handleDeleteQuote(quote.quoteId)}>Delete</button>
+                <p>{quote.text}
+                  <button className="quoteList-btn" onClick={() => {
+                    setEditQuoteId(quote.quoteId);
+                    setEditQuoteText(quote.text);
+                  }}>Edit</button>
+                  <button className="quoteList-btn" onClick={() => handleDeleteQuote(quote.quoteId)}>Delete</button>
+                </p>
               </>
             )}
           </li>
@@ -64,3 +65,5 @@ export function QuoteList({ quotes, editQuoteId, editQuoteText, setEditQuoteId, 
     </ul>
   );
 }
+
+export default QuoteList;

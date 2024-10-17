@@ -10,36 +10,42 @@ interface AddQuoteWithTagsFormProps {
 }
 
 export function AddQuoteWithTagsForm({ newQuote, setNewQuote, setQuotes, tags, token }: AddQuoteWithTagsFormProps) {
-  const [selectedTags, setSelectedTags] = useState<number[]>([]); // Uložíme ID vybraných tagů
+  const [selectedTags, setSelectedTags] = useState<number[]>([]);
 
   const handleAddQuote = async () => {
+
+    if (!newQuote.trim()) {
+      alert("Quote cannot be empty!");
+      return;
+    }
+
     const response = await fetch('http://localhost:5136/api/quotes', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${token}`,
       },
-      body: JSON.stringify({ text: newQuote, tagIds: selectedTags }), // Předáme tagy
+      body: JSON.stringify({ text: newQuote, tagIds: selectedTags }),
     });
 
     if (response.ok) {
       const newQuoteData = await response.json();
       setQuotes((quotes: any) => [...quotes, newQuoteData]);
-      setNewQuote('');
-      setSelectedTags([]); // Reset výběru tagů po přidání citátu
+      setNewQuote(''); 
+      setSelectedTags([]);
     }
   };
 
   const handleTagChange = (tagId: number) => {
     if (selectedTags.includes(tagId)) {
-      setSelectedTags(selectedTags.filter(id => id !== tagId)); // Odebereme, pokud je již vybrán
+      setSelectedTags(selectedTags.filter(id => id !== tagId));
     } else {
-      setSelectedTags([...selectedTags, tagId]); // Přidáme tag, pokud není vybrán
+      setSelectedTags([...selectedTags, tagId]);
     }
   };
 
   return (
-    <div>
+    <div className='addQuote'>
       <h3>Add a new quote with tags</h3>
       <input
         type="text"
@@ -47,10 +53,10 @@ export function AddQuoteWithTagsForm({ newQuote, setNewQuote, setQuotes, tags, t
         onChange={(e) => setNewQuote(e.target.value)}
         placeholder="New quote"
       />
-      <div>
+      <div className='tagBox'>
         <h4>Select Tags</h4>
         {tags.map(tag => (
-          <div key={tag.tagId}>
+          <div className='tag-list' key={tag.tagId}>
             <input
               type="checkbox"
               id={`tag-${tag.tagId}`}

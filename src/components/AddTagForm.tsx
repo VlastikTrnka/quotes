@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
-import { TagType } from './Type'; // Importujeme typ TagType
+import { TagType } from './Type';
 
 interface AddTagFormProps {
-  setTags: (tags: any) => void;  // Funkce pro aktualizaci seznamu tagů
-  token: string | null;          // Token pro autentizaci
+  setTags: (tags: any) => void;  
+  token: string | null;          
 }
 
 export function AddTagForm({ setTags, token }: AddTagFormProps) {
-  const [newTagText, setNewTagText] = useState('');  // Stav pro nový tag
-  const [tagType, setTagType] = useState<TagType>(TagType.Other); // Stav pro typ tagu
+  const [newTagText, setNewTagText] = useState('');
+  const [tagType, setTagType] = useState<TagType>(TagType.Other);
 
   const handleAddTag = async () => {
     if (!newTagText) {
@@ -22,14 +22,14 @@ export function AddTagForm({ setTags, token }: AddTagFormProps) {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${token}`,
       },
-      body: JSON.stringify({ text: newTagText, type: tagType }), // Přidáme typ tagu
+      body: JSON.stringify({ text: newTagText, type: tagType }),
     });
 
     if (response.ok) {
       const newTag = await response.json();
-      setTags((prevTags: any) => [...prevTags, newTag]);  // Přidáme nový tag do seznamu tagů
-      setNewTagText('');  // Resetujeme pole
-      setTagType(TagType.Other); // Resetujeme typ tagu
+      setTags((prevTags: any) => [...prevTags, newTag]);
+      setNewTagText('');
+      setTagType(TagType.Other);
     } else {
       console.log('Failed to add tag');
     }
@@ -40,11 +40,12 @@ export function AddTagForm({ setTags, token }: AddTagFormProps) {
       <h3>Add a new tag</h3>
       <input
         type="text"
+        className='inputAdd'
         value={newTagText}
         onChange={(e) => setNewTagText(e.target.value)}
         placeholder="New tag text"
       />
-      <select value={tagType} onChange={(e) => setTagType(Number(e.target.value))}>
+      <select className='inputAdd' value={tagType} onChange={(e) => setTagType(Number(e.target.value))}>
         <option value={TagType.Other}>Other</option>
         <option value={TagType.Author}>Author</option>
         <option value={TagType.Language}>Language</option>
